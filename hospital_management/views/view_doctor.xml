@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_emergency_form" model="ir.ui.view">
+        <field name="name">emergency</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <form string="emergency">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="joining"/>
+                        <field name="gender"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_emergency_kanban" model="ir.ui.view">
+    <field name="name">emergency</field>
+    <field name="model">hospital.doctor</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <field name="name"/>
+            <field name="joining"/>
+            <field name="gender"/>
+
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <strong><field name="name"/></strong><br/>
+                        Joining: <field name="joining"/><br/>
+                        Gender: <field name="gender"/><br/>
+
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+    <record id="view_emergency_list" model="ir.ui.view">
+        <field name="name">emergency</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <list string="emergency">
+                <field name="name"/>
+                <field name="joining"/>
+                <field name="gender"/>
+
+            </list>
+        </field>
+    </record>
+
+
+    <record id="action_hospital_emergency" model="ir.actions.act_window">
+        <field name="name">doctor</field>
+        <field name="res_model">hospital.doctor</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="view_id" ref="view_emergency_list"/>
+    </record>
+</odoo>
