@@ -7,4 +7,7 @@ class Hospitalemergency(models.Model):
     name=fields.Char(string="Name")
     joining=fields.Date(string="experience")
     gender = fields.Selection([("male", "Male"), ("female", "Female")], "Gender")
+    Age=fields.Integer("age")
+
+    image_1920=fields.Binary(string='image')
 

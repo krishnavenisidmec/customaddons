@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_emergency_form" model="ir.ui.view">
-        <field name="name">emergency</field>
+        <field name="name">doctor</field>
         <field name="model">hospital.doctor</field>
         <field name="arch" type="xml">
             <form string="emergency">
                 <sheet>
+                    <field name="image_1920" widget="image" class="oe_avatar" />
                     <group>
                         <field name="name"/>
                         <field name="joining"/>
@@ -16,7 +17,7 @@
         </field>
     </record>
     <record id="view_emergency_kanban" model="ir.ui.view">
-    <field name="name">emergency</field>
+    <field name="name">doctor</field>
     <field name="model">hospital.doctor</field>
     <field name="arch" type="xml">
         <kanban>
@@ -39,7 +40,7 @@
 </record>
 
     <record id="view_emergency_list" model="ir.ui.view">
-        <field name="name">emergency</field>
+        <field name="name">doctor</field>
         <field name="model">hospital.doctor</field>
         <field name="arch" type="xml">
             <list string="emergency">
@@ -52,10 +53,50 @@
     </record>
 
 
+    <record id="view_emergency_graph" model="ir.ui.view">
+        <field name="name">doctor</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <graph string="emergency">
+                <field name="name"/>
+                <field name="joining"/>
+                <field name="gender"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_emergency_pivot" model="ir.ui.view">
+        <field name="name">doctor</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <pivot string="emergency">
+                <field name="name"/>
+                <field name="joining"/>
+                <field name="gender"/>
+            </pivot>
+        </field>
+    </record>
+
+
+    <record id="view_emergency_search" model="ir.ui.view">
+    <field name="name">emergency</field>
+    <field name="model">hospital.doctor</field>
+    <field name="arch" type="xml">
+        <search string="Doctor search">
+            <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>
+            <filter string="Female" name="female" domain="[('gender', '=', 'female')]"/>
+            <filter name="Age" string="age" domain="[('Age','>','20')]"/>
+        </search>
+    </field>
+</record>
+
+
+
+
     <record id="action_hospital_emergency" model="ir.actions.act_window">
         <field name="name">doctor</field>
         <field name="res_model">hospital.doctor</field>
-        <field name="view_mode">list,form,kanban</field>
+        <field name="view_mode">list,form,kanban,graph,pivot,search</field>
         <field name="view_id" ref="view_emergency_list"/>
     </record>
 </odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_patient_report_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="object">
+                <t t-call="web.external_layout">
+                    <div class="page" style="">
+                        <div>
+                            <img t-if="object.company_id.logo" t-att-src="image_data_uri(object.company_id.logo)"
+                                 style="max-height: 100px;" alt="Logo"/>
+                            <br/>
+                        </div>
+                        <span t-field="object.patient_id"/>
+                        <br/>
+                        <span t-field="object.email"/>
+                        <br/>
+                    </div>
+                    <div style="text-align:right; mt-20px padding-right:50px;">
+                        <span t-field="object.gender"/>
+                        <br/>
+                        <span t-field="object.patient_id"/>
+                        <br/>
+                        <span t-field="object.email"/>
+                        <br/>
+                        <span t-field="object.user_id"/>
+                        <br/>
+                    </div>
+                    <div style="text-align:left; mt-20px padding-left:50px;">
+                        <span t-field="object.user_id"/>
+                        <br/>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0 20px; margin-top: 10px;">
+                        <div>
+                            <p>Admit Date</p>
+                            <br/>
+                            <span t-field="object.admit_date"/>
+                        </div>
+                        <div>
+                            <p>Discharge Date</p>
+                            <br/>
+                            <span t-field="object.discharge_date"/>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>patient</th>
+                                    <th>quantity</th>
+                                    <th>unit_price</th>
+                                    <th>total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="object.patient_lines" t-as="l">
+                                    <tr>
+                                        <td>
+                                            <t t-esc="l.product_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="l.patient.patient_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="l.quantity"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="l.unit_price"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="l.total"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <td colspan="4">
+                                    Total
+                                </td>
+                                <td>
+                                    <span t-esc="sum(line.total for line in object.patient_lines)"/>
+                                </td>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

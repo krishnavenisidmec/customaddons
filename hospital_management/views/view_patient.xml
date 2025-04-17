@@ -5,16 +5,29 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form string="patient">
+                <header>
+                    <button name="send_email" string="Send mail" type="object" class="btn-primary"/>
+                    <field name="status" widget="statusbar" statusbar_visible="admit,discharge"/>
+                </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                                name="view_patient_lines"
+                                type="object"
+                                icon="fa-pencil-square-o"
+                                string="patient"/>
+                    </div>
                     <group>
                         <group>
-                        <field name="patient_id"/>
-                        <field name="email"/>
-                        <field name="age"/>
+                            <field name="patient_id"/>
+                            <field name="email"/>
+                            <field name="age"/>
+                            <field name="doctor_names" widget="many2many_tags"/>
                         </group>
                         <group>
-                            <field name="doctor_id"/>
-                            <field name="gender"/>
+                            <field name="is_patient_in_ward"/>
+                            <field name="admit_date" invisible="is_patient_in_ward == False"/>
+                            <field name="discharge_date" invisible="is_patient_in_ward == False"/>
                         </group>
                     </group>
                     <notebook>
@@ -33,6 +46,12 @@
                                     <field name="total"/>
                                 </form>
                             </field>
+                        </page>
+                        <page string="other information">
+                            <group>
+                                <field name="user_id"/>
+                                <field name="company_id"/>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
