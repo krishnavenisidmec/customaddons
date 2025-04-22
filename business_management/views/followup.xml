@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_customer_followup_form" model="ir.ui.view">
+        <field name="name">customer.followup.form</field>
+        <field name="model">customer.followup</field>
+        <field name="arch" type="xml">
+            <form string="Customer Follow-Up">
+                <sheet>
+                    <group>
+                        <field name="salesperson_id"/>
+                        <field name="followup_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_followup" model="ir.actions.act_window">
+        <field name="name">Customer Follow-Up</field>
+        <field name="res_model">customer.followup</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

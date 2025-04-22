@@ -4,17 +4,7 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="object">
                 <t t-call="web.external_layout">
-                    <div class="page" style="">
-                        <div>
-                            <img t-if="object.company_id.logo" t-att-src="image_data_uri(object.company_id.logo)"
-                                 style="max-height: 100px;" alt="Logo"/>
-                            <br/>
-                        </div>
-                        <span t-field="object.patient_id"/>
-                        <br/>
-                        <span t-field="object.email"/>
-                        <br/>
-                    </div>
+
                     <div style="text-align:right; mt-20px padding-right:50px;">
                         <span t-field="object.gender"/>
                         <br/>

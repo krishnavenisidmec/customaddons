@@ -7,6 +7,7 @@ class Hospitalpatient(models.Model):
     _rec_name ="patient_id"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    name = fields.Char("patient sequence", default="New")
     patient_id = fields.Many2one(comodel_name="res.partner", string="Name", tracking=True, required=True, )
     doctor_names = fields.Many2many(comodel_name="hospital.doctor", string="Doctors")
 
@@ -23,8 +24,7 @@ class Hospitalpatient(models.Model):
     admit_date=fields.Date("Admit date")
     discharge_date=fields.Date("discharge date")
     status = fields.Selection([("admit", "Admitted"), ("discharge", "Discharged")], "status", default='admit',compute='status_date')
-
-
+    image_1920 = fields.Binary("image")
 
 
     @api.onchange('patient_id')
@@ -46,6 +46,12 @@ class Hospitalpatient(models.Model):
         for rec in self:
             template = self.env.ref("hospital_management.mail_template_patient_confirm")
             template.send_mail(rec.id, force_send=True)
+
+    def create(self, vals):
+        vals["user_id"] = self.env.user.id
+        vals["company_id"] = self.env.user.company_id.id
+        vals["name"] = self.env['ir.sequence'].next_by_code('hospital.patient')
+        return super(Hospitalpatient, self).create(vals)
 
 
 

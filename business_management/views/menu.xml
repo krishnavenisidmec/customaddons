@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_partner" name="BMS" />
+    <menuitem id="menu_business_partner" name="Shipment" action="action_partner_shipment" parent="menu_partner"/>
+    <menuitem id="menu_customer_followup" name="followup" action="action_customer_followup" parent="menu_partner"/>
+
+</odoo>
