@@ -2,15 +2,19 @@
     'name': 'Business management',
     'version': '1.0',
     'author': 'krishnaveni',
-    "depends":["base","sale"],
+    "depends": ["base","account", "sale","mail","report_xlsx"],
     'data': [
         'security/ir.model.access.csv',
         'data/ir.sequence.xml',
         'views/res_partner.xml',
         'views/view_saleorder.xml',
         'views/shipment.xml',
+        'views/customer.xml',
         'views/menu.xml',
+        'reports/report_partner_template.xml',
+        'reports/report.xml',
+        'wizards/partner_wizard.xml',
+        'data/mail_template.xml',
         'views/followup.xml',
-
     ],
 }

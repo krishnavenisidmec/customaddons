@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_partner_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="object">
+
+                <div style="text-align:right; mt-20px padding-right:50px;">
+                    <span t-field="object.name"/>
+                    <br/>
+                    <span t-field="object.partner_id"/>
+                    <br/>
+                    <span t-field="object.email"/>
+                    <br/>
+                    <span t-field="object.age"/>
+                    <br/>
+                </div>
+                <div style="text-align:left; mt-20px padding-left:50px;">
+                    <span t-field="object.user_id"/>
+                    <br/>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0 20px; margin-top: 10px;">
+                    <div>
+                        <p>User Id</p>
+                        <br/>
+                        <span t-field="object.user_id"/>
+                    </div>
+                    <div>
+                        <p>company_id</p>
+                        <br/>
+                        <span t-field="object.company_id"/>
+                    </div>
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>patient</th>
+                                <th>quantity</th>
+                                <th>unit_price</th>
+                                <th>total</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+
+            </t>
+        </t>
+    </template>
+</odoo>

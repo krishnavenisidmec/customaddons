@@ -9,6 +9,7 @@
                     <group>
                         <field name="salesperson_id"/>
                         <field name="followup_date"/>
+
                     </group>
                 </sheet>
             </form>
