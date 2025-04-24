@@ -11,3 +11,5 @@ class CustomerReport(models.TransientModel):
 
     def view_pdf_report(self):
         return self.env.ref('business_management.report_patient_pdf').report_action(self)
+
+

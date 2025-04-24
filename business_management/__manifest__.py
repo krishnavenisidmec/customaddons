@@ -10,11 +10,12 @@
         'views/view_saleorder.xml',
         'views/shipment.xml',
         'views/customer.xml',
-        'views/menu.xml',
         'reports/report_partner_template.xml',
         'reports/report.xml',
         'wizards/partner_wizard.xml',
+        'wizards/sale_order_wizard.xml',
         'data/mail_template.xml',
         'views/followup.xml',
+        'views/menu.xml',
     ],
 }

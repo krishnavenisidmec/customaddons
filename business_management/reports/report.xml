@@ -23,5 +23,10 @@
         <field name="binding_model_id" ref="model_task_customer"/>
         <field name="binding_type">report</field>
     </record>
+
+
+
+
+
 </odoo>
 
