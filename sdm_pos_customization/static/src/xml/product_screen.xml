@@ -4,6 +4,9 @@
         <xpath expr="//ProductCard" position="attributes">
             <attribute name="lst_price">product.lst_price</attribute>
         </xpath>
+        <xpath expr="//ProductCard" position="attributes">
+            <attribute name="barcode">product.barcode</attribute>
+        </xpath>
          <xpath expr="//ProductCard" position="attributes">
             <attribute name="standard_price">product.standard_price</attribute>
         </xpath>

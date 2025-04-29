@@ -7,5 +7,6 @@ patch(ProductCard, {
         lst_price: { type: Number, optional: true },
         barcode: {type: String, optional: true},
         standard_price:{ type:Number, optional: true},
+
     },
 })
