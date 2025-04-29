@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="sdm_pos_customization.ProductCard" t-inherit="point_of_sale.ProductCard" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('product-img')]" position="after">
+            <div t-esc="props.lst_price"/>
+        </xpath>
+        <xpath expr="//div[hasclass('product-img')]" position="after">
+            <div t-esc="props.barcode"/>
+        </xpath>
+        <xpath expr="//div[hasclass('product-img')]" position="before">
+            <div t-esc="props.standard_price"/>
+        </xpath>
+    </t>
+</templates>

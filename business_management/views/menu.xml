@@ -6,5 +6,5 @@
     <menuitem id="menu_customer_partner" name="customer" action="action_task_customer" parent="menu_partner"/>
     <menuitem id="menu_credit_notes" name="invoices" action="account.action_move_out_invoice" parent="menu_partner"/>
     <menuitem id="menu_wizard_partner" name="partner report" action="action_wizard_report" parent="menu_partner"/>
-    <menuitem id="menu_sale_report_root" name="Reporting" parent="sale.menu_sale_report" action="action_sales_wizard_report"/>
+    <menuitem id="menu_sale_report_root" name="Reporting" parent="sale.menu_sale_report" action="action_sale_report_wizard"/>
 </odoo>
