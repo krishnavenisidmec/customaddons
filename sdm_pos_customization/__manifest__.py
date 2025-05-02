@@ -12,11 +12,15 @@
     'assets': {
         'point_of_sale._assets_pos': [
             'sdm_pos_customization/static/src/js/product.js',
+            'sdm_pos_customization/static/src/js/controlbuttons.js',
+            'sdm_pos_customization/static/src/js/dropdown.js',
             'sdm_pos_customization/static/src/xml/product_card.xml',
             'sdm_pos_customization/static/src/xml/product_screen.xml',
             'sdm_pos_customization/static/src/js/orderline.js',
             'sdm_pos_customization/static/src/xml/orderline.xml',
             'sdm_pos_customization/static/src/xml/orderwidget.xml',
+            'sdm_pos_customization/static/src/xml/controlbuttons.xml',
+            'sdm_pos_customization/static/src/xml/dropdown.xml',
 
         ],
 
