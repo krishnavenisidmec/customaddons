@@ -1,5 +1,9 @@
 from odoo import models,fields,api
 from datetime import date
+from odoo.exceptions import ValidationError
+import re
+
+
 
 
 class Hospitalpatient(models.Model):
@@ -25,6 +29,8 @@ class Hospitalpatient(models.Model):
     discharge_date=fields.Date("discharge date")
     status = fields.Selection([("admit", "Admitted"), ("discharge", "Discharged")], "status", default='admit',compute='status_date')
     image_1920 = fields.Binary("image")
+    appointment_id= fields.Many2one('hospital.patient.appointments', string="Appointment")
+    appointment_date = fields.Datetime("Appointment Date", related='appointment_id.appointment_date', store=True)
 
 
     @api.onchange('patient_id')

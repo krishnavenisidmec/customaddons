@@ -10,6 +10,7 @@
             "views/view_patient.xml",
             "views/view_doctor.xml",
             "views/data/mail_template.xml",
+            "views/data/patient_appointment_mail.xml",
             "views/view_sale_order.xml",
             "report/report_patient_template.xml",
             "report/report.xml",

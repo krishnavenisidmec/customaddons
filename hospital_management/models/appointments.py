@@ -1,13 +1,17 @@
 from odoo import models, fields, api
+from datetime import date
+
+
 
 
 class PatientAppointment(models.Model):
     _name = "hospital.patient.appointments"
+    _rec_name = "patient_name"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    patient_id = fields.Many2one("res.partner", "Name", domain=[("email", "!=", False)])
-    email = fields.Char(related="patient_id.email", string="email",tracking=True)
-    patient_age = fields.Integer("Age",tracking=True)
+    patient_name = fields.Many2one("res.partner", "Name", domain=[("email", "!=", False)])
+    email = fields.Char(related="patient_name.email", string="email",tracking=True)
+    age = fields.Integer("Age",tracking=True)
     date = fields.Date("Date")
     appointment_date = fields.Datetime("appointment date and time")
     company_id = fields.Many2one("res.company", string="Company")
@@ -15,28 +19,27 @@ class PatientAppointment(models.Model):
     status = fields.Selection([("draft", "Draft"), ("confirm", "Confirmed")], "status", default="draft")
     appointment_line_id = fields.One2many("patient.appointments.line", "appointment_id", "appointment fee")
 
-    @api.model
-    def create(self, vals):
-        vals['user_id'] = self.env.user.id
-        vals['company_id'] = self.env.company.id
-        return super(PatientAppointment, self).create(vals)
 
-    def write(self, vals):
-        vals['user_id'] = self.env.user.id
-        vals['company_id'] = self.env.company.id
-        return super(PatientAppointment, self).write(vals)
 
     def action_send_email(self):
         template = self.env.ref("hospital_management.mail_template_demo_patient_invoice")
         for rec in self:
-            if not rec.patient_id.email:
+            if not rec.email:
                 raise ValueError("pls add partner email")
             else:
                 rec.user_id = self.env.user.id
                 template.send_mail(rec.id, force_send=True)
 
     def view_appointment(self):
-        print("hello")
+        self.ensure_one()
+        for rec in self:
+            return {
+                'name': "view patient",
+                'view_mode': 'list',
+                'res_model': 'hospital.patient',
+                # 'domain': [('patient', '=', rec.patient_name)],
+                'type': 'ir.actions.act_window',
+            }
 
 
     def action_confirm(self):
@@ -46,15 +49,15 @@ class PatientAppointment(models.Model):
                 raise ValueError("record existed")
             else:
                 vals = {
-                    'patient_id': rec.patient_id.id,
+                    'patient_id': rec.patient_name.id,
                     'email': rec.email,
-                    'patient_age': rec.patient_age,
-                    'date': rec.appointment_date,
-                    'invoices': [(0, 0, {
-                        'product': i.product.id,
+                    'age': rec.age,
+                    'appointment_date': rec.appointment_date,
+                    'patient_lines': [(0, 0, {
+                        'product_id': i.product.id,
                         'qty': i.qty,
                         'unit_price': i.unit_price,
-                        'sub_total': i.sub_total,
+                        'total': i.sub_total,
 
                     }) for i in rec.appointment_line_id]
 
@@ -71,13 +74,13 @@ class PatientAppointment(models.Model):
 class PatientAppointmentLines(models.Model):
     _name = "patient.appointments.line"
 
-    product = fields.Many2one("product.product", string="Product name", required=True)
-    qty = fields.Float(string="Qty", required=True, default=1.00)
-    unit_price = fields.Float(related="product.lst_price", string="Unit price")
+    product_id = fields.Many2one("product.product", string="Product name", required=True)
+    quantity = fields.Float(string="Qty", required=True, default=1.00)
+    unit_price = fields.Float(related="product_id.lst_price", string="Unit price")
     amount_due = fields.Float(string="Due Amount")
-    sub_total = fields.Float(string="Sub Total", readonly=True, compute="compute_subtotal")
-    appointment_id = fields.Many2one("hospital.patient.appointments", string="Patient", required=True)
+    total = fields.Float(string="Sub Total", readonly=True, compute="compute_subtotal")
+    appointment_id= fields.Many2one("hospital.patient.appointments", string="Patient", required=True)
 
     def compute_subtotal(self):
         for rec in self:
-            rec.sub_total = rec.qty * rec.unit_price
+            rec.total = rec.quantity * rec.unit_price

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_patient_appointment_list" model="ir.ui.view">
-        <field name="name">hospital.patient.appointments.list.view</field>
+        <field name="name">appointment</field>
         <field name="model">hospital.patient.appointments</field>
         <field name="arch" type="xml">
             <list string="Appointments">
-                <field name="patient_id"/>
-                <field name="patient_age"/>
+                <field name="patient_name"/>
+                <field name="age"/>
                 <field name="date" optional="hide"/>
             </list>
         </field>
     </record>
 
     <record id="view_patient_appointment_form" model="ir.ui.view">
-        <field name="name">hospital.patient.appointments.form.view</field>
+        <field name="name">appointment</field>
         <field name="model">hospital.patient.appointments</field>
         <field name="arch" type="xml">
             <form>
@@ -42,9 +42,9 @@
                     </div>
                     <group>
                         <group>
-                            <field name="patient_id"/>
+                            <field name="patient_name"/>
                             <field name="email"/>
-                            <field name="patient_age"/>
+                            <field name="age"/>
                             <field name="date"/>
                         </group>
                         <group>
@@ -57,16 +57,16 @@
                         <page string="Fee Structure">
                             <field name="appointment_line_id">
                                 <list editable="bottom">
-                                    <field name="product"/>
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
                                     <field name="unit_price"/>
-                                    <field name="sub_total"/>
+                                    <field name="total"/>
                                 </list>
                                 <form>
-                                    <group>
-                                        <field name="product" readonly="parent.status  != 'draft'"/>
-                                        <field name="unit_price" readonly="parent.status  != 'draft'"/>
-                                        <field name="sub_total" readonly="parent.status  != 'draft'"/>
-                                    </group>
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_price"/>
+                                    <field name="total"/>
                                 </form>
                             </field>
                         </page>
@@ -76,6 +76,8 @@
             </form>
         </field>
     </record>
+
+
 
     <record id="action_hospital_patient_appointments" model="ir.actions.act_window">
         <field name="name">Appointments</field>
